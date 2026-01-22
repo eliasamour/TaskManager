@@ -5,6 +5,7 @@ import { authRouter } from "./routes/auth";
 import { auth, AuthenticatedRequest } from "./middlewares/auth";
 import { listsRouter } from "./routes/lists";
 import { tasksRouter } from "./routes/tasks";
+import { aiRouter } from "./routes/ai";
 
 const app = express();
 
@@ -23,6 +24,8 @@ app.get("/me", auth, (req: AuthenticatedRequest, res) => {
 app.use("/lists", listsRouter);
 
 app.use(tasksRouter);
+
+app.use(aiRouter);
 
 app.listen(env.PORT, () => {
   console.log(`API running on http://localhost:${env.PORT}`);
