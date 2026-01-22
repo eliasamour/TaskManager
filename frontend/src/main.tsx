@@ -7,6 +7,8 @@ import Login from "./pages/Login";
 import Register from "./pages/Register";
 import RequireAuth from "./RequireAuth";
 import "./index.css";
+import AppPage from "./pages/App";
+
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
@@ -22,7 +24,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
             path="/"
             element={
               <RequireAuth>
-                <div className="p-6 text-white">App</div>
+                <AppPage />
               </RequireAuth>
             }
           />
