@@ -15,10 +15,12 @@ export default function TasksPanel({
     listId,
     onSelectTask,
     selectedTaskId,
+    refreshKey,
 }: {
     listId: string | null;
     onSelectTask: (id: string | null) => void;
     selectedTaskId: string | null;
+    refreshKey: number;
 }) {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState(false);
@@ -58,7 +60,7 @@ export default function TasksPanel({
         }
         loadTasks(listId);
         // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [listId]);
+    }, [listId, refreshKey]);
 
     function resetForm() {
         setTitle("");
