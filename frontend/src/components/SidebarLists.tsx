@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
+import { clearToken } from "../auth";
+import { useNavigate } from "react-router-dom";
 
 type TaskList = {
   id: string;
@@ -24,6 +26,13 @@ export default function SidebarLists({
 
   const [confirmDeleteId, setConfirmDeleteId] = useState<string | null>(null);
   const [deleting, setDeleting] = useState(false);
+
+  const navigate = useNavigate();
+
+  function logout() {
+    clearToken();
+    navigate("/login", { replace: true });
+  }
 
   async function loadLists() {
     setLoading(true);
@@ -155,11 +164,10 @@ export default function SidebarLists({
             <li key={list.id} className="flex items-center gap-2">
               <button
                 onClick={() => setSelectedId(list.id)}
-                className={`flex-1 rounded px-3 py-2 text-left ${
-                  selectedId === list.id
-                    ? "bg-violet-600"
-                    : "hover:bg-slate-800"
-                }`}
+                className={`flex-1 rounded px-3 py-2 text-left ${selectedId === list.id
+                  ? "bg-violet-600"
+                  : "hover:bg-slate-800"
+                  }`}
               >
                 {list.name}
               </button>
@@ -210,6 +218,15 @@ export default function SidebarLists({
           </div>
         </div>
       )}
+      {/* Logout */}
+      <div className="mt-4 border-t border-slate-800 pt-4">
+        <button
+          onClick={logout}
+          className="w-full rounded-xl bg-slate-800 py-2 text-sm text-slate-200 hover:bg-red-500/30 hover:text-red-300"
+        >
+          Logout
+        </button>
+      </div>
     </div>
   );
 }

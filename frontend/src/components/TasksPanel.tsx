@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../api";
+import AiHomeInsights from "./AiHomeInsights";
+import AiListInsights from "./AiListInsights";
 
 type Task = {
     id: string;
@@ -132,12 +134,16 @@ export default function TasksPanel({
 
     if (!listId) {
         return (
-            <div className="p-8 text-slate-300">
-                <h2 className="text-xl font-semibold text-white">Tasks</h2>
-                <p className="mt-3">Select a list to see its tasks.</p>
+            <div className="p-6">
+                <AiHomeInsights />
+                <div className="mt-6 text-slate-300">
+                    <h2 className="text-xl font-semibold text-white">Tasks</h2>
+                    <p className="mt-3">Select a list to see its tasks.</p>
+                </div>
             </div>
         );
     }
+
 
     const todoTasks = tasks.filter((t) => t.status !== "DONE");
     const doneTasks = tasks.filter((t) => t.status === "DONE");
@@ -157,6 +163,10 @@ export default function TasksPanel({
                     + Add task
                 </button>
             </div>
+            <div className="mt-4">
+                <AiListInsights listId={listId} />
+            </div>
+
 
             {loading && <p className="mt-4 text-slate-400">Loading...</p>}
 
@@ -179,8 +189,8 @@ export default function TasksPanel({
                             <li key={t.id}>
                                 <div
                                     className={`flex items-center gap-3 rounded-xl border px-4 py-3 transition ${active
-                                            ? "border-violet-500 bg-violet-500/10"
-                                            : "border-slate-800 hover:bg-slate-900/40"
+                                        ? "border-violet-500 bg-violet-500/10"
+                                        : "border-slate-800 hover:bg-slate-900/40"
                                         }`}
                                 >
                                     <input
@@ -230,8 +240,8 @@ export default function TasksPanel({
                                         <li key={t.id}>
                                             <div
                                                 className={`flex items-center gap-3 rounded-xl border px-4 py-3 transition ${active
-                                                        ? "border-violet-500 bg-violet-500/10"
-                                                        : "border-slate-800 hover:bg-slate-900/40"
+                                                    ? "border-violet-500 bg-violet-500/10"
+                                                    : "border-slate-800 hover:bg-slate-900/40"
                                                     }`}
                                             >
                                                 <input

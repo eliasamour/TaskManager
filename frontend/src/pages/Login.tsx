@@ -1,25 +1,16 @@
 import { useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { api } from "../api";
 import { setToken } from "../auth";
 
-type LoginResponse = {
-  token: string;
-  user: {
-    id: string;
-    firstName: string;
-    lastName: string;
-    email: string;
-    createdAt: string;
-  };
-};
+type LoginResponse = { token: string };
 
 export default function Login() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("elias@test.com");
   const [password, setPassword] = useState("password123");
-  const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: React.FormEvent) {
     e.preventDefault();
@@ -31,7 +22,6 @@ export default function Login() {
         method: "POST",
         body: JSON.stringify({ email, password }),
       });
-
       setToken(res.token);
       navigate("/", { replace: true });
     } catch (err: unknown) {
@@ -43,45 +33,63 @@ export default function Login() {
 
   return (
     <div>
-      <h1 className="text-2xl font-semibold">Log in</h1>
+      <h1 className="text-xl font-semibold tracking-tight">Log In</h1>
+      <p className="mt-1 text-sm text-slate-200/70">
+        Welcome back. Please enter your details.
+      </p>
 
       {error && (
-        <div className="mt-4 rounded-lg bg-red-500/20 p-3 text-sm text-red-200">
+        <div className="mt-5 rounded-2xl bg-red-500/15 p-4 text-sm text-red-200 ring-1 ring-red-500/20">
           {error}
         </div>
       )}
 
       <form className="mt-6 space-y-4" onSubmit={onSubmit}>
-        <input
-          className="w-full rounded bg-slate-800 p-3 outline-none ring-1 ring-slate-700 focus:ring-violet-500"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          autoComplete="email"
-        />
-        <input
-          className="w-full rounded bg-slate-800 p-3 outline-none ring-1 ring-slate-700 focus:ring-violet-500"
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          autoComplete="current-password"
-        />
+        <label className="block">
+          <span className="mb-2 block text-xs text-slate-200/70">Email</span>
+          <input
+            className="w-full rounded-2xl bg-black/20 px-4 py-3 text-sm text-white placeholder:text-slate-400/70
+                       ring-1 ring-white/10 outline-none backdrop-blur
+                       focus:ring-2 focus:ring-violet-500/70"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            autoComplete="email"
+          />
+        </label>
+
+        <label className="block">
+          <span className="mb-2 block text-xs text-slate-200/70">Password</span>
+          <input
+            className="w-full rounded-2xl bg-black/20 px-4 py-3 text-sm text-white placeholder:text-slate-400/70
+                       ring-1 ring-white/10 outline-none backdrop-blur
+                       focus:ring-2 focus:ring-violet-500/70"
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            autoComplete="current-password"
+          />
+        </label>
+
 
         <button
           disabled={loading}
-          className="w-full rounded bg-violet-600 py-3 font-medium hover:bg-violet-500 disabled:opacity-60"
+          className="mt-2 w-full rounded-2xl bg-violet-600 py-3 text-sm font-semibold text-white
+                     shadow-lg shadow-violet-600/25 transition
+                     hover:bg-violet-500 disabled:opacity-60"
         >
-          {loading ? "Logging in..." : "Log in"}
+          {loading ? "Logging in..." : "Log In"}
         </button>
-      </form>
 
-      <p className="mt-4 text-sm text-slate-300">
-        No account?{" "}
-        <Link className="text-violet-300 hover:underline" to="/register">
-          Create one
+        <Link
+          to="/register"
+          className="block w-full rounded-2xl bg-white/5 py-3 text-center text-sm font-semibold text-white/80
+                     ring-1 ring-white/10 hover:bg-white/10"
+        >
+          Create Account
         </Link>
-      </p>
+      </form>
     </div>
   );
 }
