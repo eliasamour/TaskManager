@@ -112,13 +112,12 @@ export default function SidebarLists({
   return (
     <div className="h-full p-4 flex flex-col">
       <div className="flex items-center justify-between">
-        <h2 className="text-lg font-semibold">My lists</h2>
         <button
           onClick={() => {
             setError(null);
             setShowCreate((v) => !v);
           }}
-          className="rounded-lg bg-slate-800 px-3 py-2 text-sm hover:bg-slate-700"
+          className="w-full rounded-xl bg-violet-600 py-2 text-sm font-medium text-white hover:bg-violet-500"
         >
           {showCreate ? "Close" : "Create"}
         </button>
@@ -219,14 +218,6 @@ export default function SidebarLists({
         </div>
       )}
       {/* Logout */}
-      <div className="mt-4 border-t border-slate-800 pt-4">
-        <button
-          onClick={logout}
-          className="w-full rounded-xl bg-slate-800 py-2 text-sm text-slate-200 hover:bg-red-500/30 hover:text-red-300"
-        >
-          Logout
-        </button>
-      </div>
     </div>
   );
 }

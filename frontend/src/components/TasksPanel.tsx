@@ -186,7 +186,7 @@ export default function TasksPanel({
                     {todoTasks.map((t) => {
                         const active = selectedTaskId === t.id;
                         return (
-                            <li key={t.id}>
+                            <li key={t.id} data-task-row="true">
                                 <div
                                     className={`flex items-center gap-3 rounded-xl border px-4 py-3 transition ${active
                                         ? "border-violet-500 bg-violet-500/10"
@@ -237,7 +237,7 @@ export default function TasksPanel({
                                 doneTasks.map((t) => {
                                     const active = selectedTaskId === t.id;
                                     return (
-                                        <li key={t.id}>
+                                        <li key={t.id} data-task-row="true">
                                             <div
                                                 className={`flex items-center gap-3 rounded-xl border px-4 py-3 transition ${active
                                                     ? "border-violet-500 bg-violet-500/10"

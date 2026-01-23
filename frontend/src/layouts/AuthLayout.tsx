@@ -1,5 +1,6 @@
 import { Outlet, Link, useLocation } from "react-router-dom";
 import logo from "../assets/logo-saegus.png";
+import AppBackground from "../components/AppBackground";
 
 function NavPill({ to, label }: { to: string; label: string }) {
   const { pathname } = useLocation();
@@ -22,15 +23,10 @@ function NavPill({ to, label }: { to: string; label: string }) {
 
 export default function AuthLayout() {
   return (
-    <div className="min-h-screen text-white">
+    <div className="relative isolate min-h-screen text-white">
       {/* Background */}
-      <div className="fixed inset-0 -z-10">
-        <div className="absolute inset-0 bg-gradient-to-br from-slate-950 via-slate-950 to-slate-950" />
-        <div className="absolute -left-40 -top-40 h-[520px] w-[520px] rounded-full bg-violet-600/25 blur-3xl" />
-        <div className="absolute left-40 top-10 h-[380px] w-[380px] rounded-full bg-sky-500/20 blur-3xl" />
-        <div className="absolute right-[-120px] top-[-120px] h-[520px] w-[520px] rounded-full bg-fuchsia-500/10 blur-3xl" />
-        <div className="absolute inset-0 bg-black/40" />
-      </div>
+      <AppBackground />
+
 
       {/* Top bar */}
       <header className="mx-auto flex w-full max-w-6xl items-center justify-between px-6 py-6">
